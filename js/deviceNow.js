@@ -17,12 +17,11 @@
 	$.fn.deviceNow = function(onResize) {
 		var env = ["xs", "sm", "md", "lg"],
 			device=env[3],
-			callBacks=[],
+			callBack=null,
 			timer=null;
 
 		var detect=function(){
-			var $el = $('<div>');
-		    $el.appendTo($('body'));
+			var $el = $('<div>').appendTo('body');
 		    for (var i = env.length - 1; i >= 0; i--) {
 		        $el.addClass('hidden-'+env[i]);
 		        if ($el.is(':hidden')) {
@@ -37,19 +36,18 @@
 		var resizeComplete=function(){
 			var prev=device,
 				dev=detect();
-			if(dev!=prev && callBacks.length){
-				$.each(callBacks,function(i){
-					callBacks[i](dev);
-				});	
+			if(dev!=prev && callBack){
+				callBack(dev);
 			}
 		};
 		if (onResize && "function" == typeof(onResize)) {
-			callBacks.push(onResize);
+			callBack=onResize;
 			$(window).resize(function(event) {
 				clearTimeout(timer); //use timer to track resize complete
 	    		timer = setTimeout(resizeComplete, 300);
 			});
 		}
+		console.log(callBack)
 		return detect();
 	};
 })(jQuery);
