@@ -47,7 +47,6 @@
 	    		timer = setTimeout(resizeComplete, 300);
 			});
 		}
-		console.log(callBack)
 		return detect();
 	};
 })(jQuery);
