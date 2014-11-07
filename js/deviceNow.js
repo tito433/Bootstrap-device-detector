@@ -21,11 +21,11 @@
 			timer=null;
 
 		var detect=function(){
-			var $el = $('<div>').appendTo('body');
+		    var $el = $('<div>').appendTo('body');
 		    for (var i = env.length - 1; i >= 0; i--) {
 		        $el.addClass('hidden-'+env[i]);
 		        if ($el.is(':hidden')) {
-		        	device=env[i];
+		            device=env[i];
 		            break;
 		        }
 		    }
@@ -35,16 +35,17 @@
 		
 		var resizeComplete=function(){
 			var prev=device,
-				dev=detect();
+			    dev=detect();
 			if(dev!=prev && callBack){
-				callBack(dev);
+			    callBack(dev);
 			}
 		};
+		
 		if (onResize && "function" == typeof(onResize)) {
 			callBack=onResize;
 			$(window).resize(function(event) {
-				clearTimeout(timer); //use timer to track resize complete
-	    		timer = setTimeout(resizeComplete, 300);
+			    clearTimeout(timer); //use timer to track resize complete
+	    		    timer = setTimeout(resizeComplete, 300);
 			});
 		}
 		return detect();
